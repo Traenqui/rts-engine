@@ -1,0 +1,32 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/core/" />
+  <Folder Name="/src/core/Jobs/">
+    <Project Path="src/core/Jobs/Rts.Jobs/Rts.Jobs.csproj" />
+    <Project Path="src/core/Jobs/Rts.Jobs.Tests/Rts.Jobs.Test.csproj" />
+  </Folder>
+  <Folder Name="/src/core/Primitives/">
+    <Project Path="src/core/Primitives/Rts.Primitives/Rts.Primitives.csproj" />
+    <Project Path="src/core/Primitives/Rts.Primitives.Tests/Rts.Primitives.Test.csproj" />
+  </Folder>
+  <Folder Name="/src/hosts/">
+    <Project Path="src/hosts/Rts.Game/Rts.Game.csproj" />
+    <Project Path="src/hosts/Rts.Headless/Rts.Headless.csproj" />
+  </Folder>
+  <Folder Name="/src/modules/" />
+  <Folder Name="/src/modules/navigation/">
+    <Project Path="src/modules/navigation/Rts.Navigation.Contracts/Rts.Navigation.Contracts.csproj" />
+    <Project Path="src/modules/navigation/Rts.Navigation/Rts.Navigation.csproj" />
+    <Project Path="src/modules/navigation/Rts.Navigation.Tests/Rts.Navigation.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/modules/rendering/">
+    <Project Path="src/modules/rendering/Rts.Rendering.Contracts/Rts.Rendering.Contracts.csproj" />
+    <Project Path="src/modules/rendering/Rts.Rendering/Rts.Rendering.csproj" />
+    <Project Path="src/modules/rendering/Rts.Rendering.Tests/Rts.Rendering.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/modules/simulation/">
+    <Project Path="src/modules/simulation/Rts.Simulation.Contracts/Rts.Simulation.Contracts.csproj" />
+    <Project Path="src/modules/simulation/Rts.Simulation/Rts.Simulation.csproj" />
+    <Project Path="src/modules/simulation/Rts.Simulation.Tests/Rts.Simulation.Tests.csproj" />
+  </Folder>
+</Solution>

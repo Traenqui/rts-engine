@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Rts.Primitives/1.0.0": {
+        "runtime": {
+          "Rts.Primitives.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Rts.Primitives/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

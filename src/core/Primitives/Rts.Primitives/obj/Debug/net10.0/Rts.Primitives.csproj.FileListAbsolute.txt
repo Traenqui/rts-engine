@@ -1,0 +1,11 @@
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/bin/Debug/net10.0/Rts.Primitives.deps.json
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/bin/Debug/net10.0/Rts.Primitives.dll
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/bin/Debug/net10.0/Rts.Primitives.pdb
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/obj/Debug/net10.0/Rts.Primitives.GeneratedMSBuildEditorConfig.editorconfig
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/obj/Debug/net10.0/Rts.Primitives.AssemblyInfoInputs.cache
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/obj/Debug/net10.0/Rts.Primitives.AssemblyInfo.cs
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/obj/Debug/net10.0/Rts.Primitives.csproj.CoreCompileInputs.cache
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/obj/Debug/net10.0/Rts.Primitives.dll
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/obj/Debug/net10.0/refint/Rts.Primitives.dll
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/obj/Debug/net10.0/Rts.Primitives.pdb
+/home/traenqui/repos/private/rts-engine/src/core/Primitives/Rts.Primitives/obj/Debug/net10.0/ref/Rts.Primitives.dll

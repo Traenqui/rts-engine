@@ -1,0 +1,11 @@
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/bin/Debug/net10.0/Rts.Navigation.Contracts.deps.json
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/bin/Debug/net10.0/Rts.Navigation.Contracts.dll
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/bin/Debug/net10.0/Rts.Navigation.Contracts.pdb
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/obj/Debug/net10.0/Rts.Navigation.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/obj/Debug/net10.0/Rts.Navigation.Contracts.AssemblyInfoInputs.cache
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/obj/Debug/net10.0/Rts.Navigation.Contracts.AssemblyInfo.cs
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/obj/Debug/net10.0/Rts.Navigation.Contracts.csproj.CoreCompileInputs.cache
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/obj/Debug/net10.0/Rts.Navigation.Contracts.dll
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/obj/Debug/net10.0/refint/Rts.Navigation.Contracts.dll
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/obj/Debug/net10.0/Rts.Navigation.Contracts.pdb
+/home/traenqui/repos/private/rts-engine/src/modules/navigation/Rts.Navigation.Contracts/obj/Debug/net10.0/ref/Rts.Navigation.Contracts.dll

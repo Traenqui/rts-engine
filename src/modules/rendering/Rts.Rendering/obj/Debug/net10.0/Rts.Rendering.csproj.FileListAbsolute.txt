@@ -1,0 +1,15 @@
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/bin/Debug/net10.0/Rts.Rendering.deps.json
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/bin/Debug/net10.0/Rts.Rendering.dll
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/bin/Debug/net10.0/Rts.Rendering.pdb
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/obj/Debug/net10.0/Rts.Rendering.GeneratedMSBuildEditorConfig.editorconfig
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/obj/Debug/net10.0/Rts.Rendering.AssemblyInfoInputs.cache
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/obj/Debug/net10.0/Rts.Rendering.AssemblyInfo.cs
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/obj/Debug/net10.0/Rts.Rendering.csproj.CoreCompileInputs.cache
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/obj/Debug/net10.0/Rts.Rendering.dll
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/obj/Debug/net10.0/refint/Rts.Rendering.dll
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/obj/Debug/net10.0/Rts.Rendering.pdb
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/obj/Debug/net10.0/ref/Rts.Rendering.dll
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/bin/Debug/net10.0/Rts.Rendering.Contracts.dll
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/bin/Debug/net10.0/Rts.Rendering.Contracts.pdb
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/obj/Debug/net10.0/Rts.Rendering.csproj.AssemblyReference.cache
+/home/traenqui/repos/private/rts-engine/src/modules/rendering/Rts.Rendering/obj/Debug/net10.0/Rts.Rend.99566107.Up2Date

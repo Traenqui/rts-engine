@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\modules\navigation\Rts.Navigation\Rts.Navigation.csproj" />
+    <ProjectReference Include="..\..\modules\navigation\Rts.Navigation.Contracts\Rts.Navigation.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\simulation\Rts.Simulation\Rts.Simulation.csproj" />
+    <ProjectReference Include="..\..\modules\simulation\Rts.Simulation.Contracts\Rts.Simulation.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\rendering\Rts.Rendering\Rts.Rendering.csproj" />
+    <ProjectReference Include="..\..\modules\rendering\Rts.Rendering.Contracts\Rts.Rendering.Contracts.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
