@@ -7,10 +7,10 @@ public sealed class NavGrid
     // Array instead of ReadOnlySpan: spans cannot live across yield boundaries (CS4007)
     private static readonly GridPosition[] NeighborDirections =
     [
-        new GridPosition { x = 0, y = -1 }, // Up
-        new GridPosition { x = 1, y = 0 },  // Right
-        new GridPosition { x = 0, y = 1 },  // Down
-        new GridPosition { x = -1, y = 0 }  // Left
+        new GridPosition { X = 0, Y = -1 }, // Up
+        new GridPosition { X = 1, Y = 0 },  // Right
+        new GridPosition { X = 0, Y = 1 },  // Down
+        new GridPosition { X = -1, Y = 0 }  // Left
     ];
 
     public int Width { get; }
@@ -31,7 +31,7 @@ public sealed class NavGrid
 
     public bool IsInside(GridPosition position)
     {
-        return position.x >= 0 && position.x < Width && position.y >= 0 && position.y < Height;
+        return position.X >= 0 && position.X < Width && position.Y >= 0 && position.Y < Height;
     }
 
     public bool IsWalkable(GridPosition position)
@@ -57,7 +57,7 @@ public sealed class NavGrid
     {
         foreach (var direction in NeighborDirections)
         {
-            var neighbor = new GridPosition { x = position.x + direction.x, y = position.y + direction.y };
+            var neighbor = new GridPosition { X = position.X + direction.X, Y = position.Y + direction.Y };
 
             if (IsWalkable(neighbor))
             {
@@ -68,6 +68,6 @@ public sealed class NavGrid
 
     private int ToIndex(GridPosition position)
     {
-        return position.y * Width + position.x;
+        return position.Y * Width + position.X;
     }
 }

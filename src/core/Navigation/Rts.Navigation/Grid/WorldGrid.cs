@@ -13,7 +13,7 @@ public static class WorldGrid
     /// <summary>World position of the tile center, used as movement waypoint (ADR-0008).</summary>
     public static FixedVector2 TileCenter(GridPosition tile)
     {
-        return new FixedVector2(Fixed.FromInt(tile.x) + Half, Fixed.FromInt(tile.y) + Half);
+        return new FixedVector2(Fixed.FromInt(tile.X) + Half, Fixed.FromInt(tile.Y) + Half);
     }
 
     /// <summary>
