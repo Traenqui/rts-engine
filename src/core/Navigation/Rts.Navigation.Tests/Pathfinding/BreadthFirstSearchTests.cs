@@ -1,4 +1,3 @@
-using Rts.Navigation.Contracts;
 using Rts.Navigation.Grid;
 using Rts.Navigation.Pathfinding;
 

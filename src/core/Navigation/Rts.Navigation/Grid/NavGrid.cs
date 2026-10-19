@@ -1,5 +1,3 @@
-using Rts.Navigation.Contracts;
-
 namespace Rts.Navigation.Grid;
 
 public sealed class NavGrid

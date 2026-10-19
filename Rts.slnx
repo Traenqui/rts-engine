@@ -5,6 +5,10 @@
     <Project Path="src/core/Jobs/Rts.Jobs/Rts.Jobs.csproj" />
     <Project Path="src/core/Jobs/Rts.Jobs.Tests/Rts.Jobs.Tests.csproj" />
   </Folder>
+  <Folder Name="/src/core/Navigation/">
+    <Project Path="src/core/Navigation/Rts.Navigation/Rts.Navigation.csproj" />
+    <Project Path="src/core/Navigation/Rts.Navigation.Tests/Rts.Navigation.Tests.csproj" />
+  </Folder>
   <Folder Name="/src/core/Primitives/">
     <Project Path="src/core/Primitives/Rts.Primitives/Rts.Primitives.csproj" />
     <Project Path="src/core/Primitives/Rts.Primitives.Tests/Rts.Primitives.Tests.csproj" />
@@ -14,11 +18,6 @@
     <Project Path="src/hosts/Rts.Headless/Rts.Headless.csproj" />
   </Folder>
   <Folder Name="/src/modules/" />
-  <Folder Name="/src/modules/navigation/">
-    <Project Path="src/modules/navigation/Rts.Navigation.Contracts/Rts.Navigation.Contracts.csproj" />
-    <Project Path="src/modules/navigation/Rts.Navigation/Rts.Navigation.csproj" />
-    <Project Path="src/modules/navigation/Rts.Navigation.Tests/Rts.Navigation.Tests.csproj" />
-  </Folder>
   <Folder Name="/src/modules/rendering/">
     <Project Path="src/modules/rendering/Rts.Rendering.Contracts/Rts.Rendering.Contracts.csproj" />
     <Project Path="src/modules/rendering/Rts.Rendering/Rts.Rendering.csproj" />

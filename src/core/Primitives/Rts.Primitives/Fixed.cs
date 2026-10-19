@@ -61,6 +61,9 @@ public readonly struct Fixed : IEquatable<Fixed>, IComparable<Fixed>
         return new((long)root);
     }
 
+    /// <summary>Largest integer less than or equal to this value, e.g. the tile index of a world coordinate.</summary>
+    public int FloorToInt() => (int)(Raw >> FractionalBits);
+
     /// <summary>Converts to <see cref="float"/>. Only for rendering, never feed the result back into the simulation.</summary>
     public float ToSingle() => (float)Raw / OneRaw;
 

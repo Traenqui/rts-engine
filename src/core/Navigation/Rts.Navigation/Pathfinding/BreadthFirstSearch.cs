@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using Rts.Navigation.Contracts;
 using Rts.Navigation.Grid;
 
 namespace Rts.Navigation.Pathfinding;
@@ -8,7 +7,7 @@ namespace Rts.Navigation.Pathfinding;
 /// Shortest paths on an unweighted 4-neighbour <see cref="NavGrid"/>.
 /// Deterministic: ties are broken by the fixed neighbour order of the grid.
 /// </summary>
-internal static class BreadthFirstSearch
+public static class BreadthFirstSearch
 {
     /// <summary>
     /// Finds the shortest path from <paramref name="start"/> to <paramref name="goal"/>.

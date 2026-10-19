@@ -222,6 +222,19 @@ public sealed class FixedTests
         Assert.Throws<ArgumentOutOfRangeException>(() => Fixed.Sqrt(Fixed.FromInt(-1)));
     }
 
+    [Theory]
+    [InlineData(98304L, 1)]
+    [InlineData(65536L, 1)]
+    [InlineData(65535L, 0)]
+    [InlineData(0L, 0)]
+    [InlineData(-1L, -1)]
+    [InlineData(-65536L, -1)]
+    [InlineData(-98304L, -2)]
+    public void FloorToInt_RoundsTowardNegativeInfinity(long raw, int expected)
+    {
+        Assert.Equal(expected, Fixed.FromRaw(raw).FloorToInt());
+    }
+
     [Fact]
     public void ToSingle_ConvertsForRendering()
     {
