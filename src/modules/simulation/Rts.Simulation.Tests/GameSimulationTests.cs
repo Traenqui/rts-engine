@@ -2,6 +2,7 @@ using Rts.Navigation.Grid;
 using Rts.Primitives;
 using Rts.Simulation.Contracts;
 using Rts.Simulation.Maps;
+using Rts.Simulation.Rules;
 
 namespace Rts.Simulation.Tests;
 
@@ -20,7 +21,7 @@ public sealed class GameSimulationTests
     [Fact]
     public void NewSimulation_StartsAtTickZero()
     {
-        var simulation = new GameSimulation(Map);
+        var simulation = new GameSimulation(Map, DefaultRules.Create());
 
         Assert.Equal(0, simulation.CreateSnapshot().Tick);
     }
@@ -28,7 +29,7 @@ public sealed class GameSimulationTests
     [Fact]
     public void NewSimulation_SpawnsTownCenterThenVillagersThenTrees()
     {
-        var simulation = new GameSimulation(Map);
+        var simulation = new GameSimulation(Map, DefaultRules.Create());
 
         var entities = simulation.CreateSnapshot().Entities;
 
@@ -41,7 +42,7 @@ public sealed class GameSimulationTests
     [Fact]
     public void NewSimulation_AssignsOwnersAndTileCenterPositions()
     {
-        var simulation = new GameSimulation(Map);
+        var simulation = new GameSimulation(Map, DefaultRules.Create());
 
         var entities = simulation.CreateSnapshot().Entities;
 
@@ -61,7 +62,7 @@ public sealed class GameSimulationTests
     [Fact]
     public void Step_AdvancesTickByOne()
     {
-        var simulation = new GameSimulation(Map);
+        var simulation = new GameSimulation(Map, DefaultRules.Create());
 
         simulation.Step();
         simulation.Step();
@@ -72,7 +73,7 @@ public sealed class GameSimulationTests
     [Fact]
     public void Step_UnknownCommandType_IsRejectedAndCounted()
     {
-        var simulation = new GameSimulation(Map);
+        var simulation = new GameSimulation(Map, DefaultRules.Create());
         simulation.Enqueue(new UnknownCommand(Player, TargetTick: 0));
 
         simulation.Step();
@@ -83,7 +84,7 @@ public sealed class GameSimulationTests
     [Fact]
     public void Step_CommandForLaterTick_IsNotProcessedEarly()
     {
-        var simulation = new GameSimulation(Map);
+        var simulation = new GameSimulation(Map, DefaultRules.Create());
         simulation.Enqueue(new UnknownCommand(Player, TargetTick: 1));
 
         simulation.Step();
@@ -97,7 +98,7 @@ public sealed class GameSimulationTests
     [Fact]
     public void Enqueue_CommandForPastTick_IsRejectedAndCounted()
     {
-        var simulation = new GameSimulation(Map);
+        var simulation = new GameSimulation(Map, DefaultRules.Create());
         simulation.Step();
 
         simulation.Enqueue(new UnknownCommand(Player, TargetTick: 0));
@@ -108,7 +109,7 @@ public sealed class GameSimulationTests
     [Fact]
     public void Enqueue_Null_Throws()
     {
-        var simulation = new GameSimulation(Map);
+        var simulation = new GameSimulation(Map, DefaultRules.Create());
 
         Assert.Throws<ArgumentNullException>(() => simulation.Enqueue(null!));
     }
@@ -126,18 +127,18 @@ public sealed class GameSimulationTests
     public void StateHash_DiffersWhenStateDiffers()
     {
         var otherMap = AsciiMapParser.Parse(string.Join("\n", "CCC.", "CCC.", "CCCV"));
-        var simulation = new GameSimulation(Map);
+        var simulation = new GameSimulation(Map, DefaultRules.Create());
         var initialHash = simulation.CreateSnapshot().StateHash;
         simulation.Step();
 
         Assert.NotEqual(initialHash, simulation.CreateSnapshot().StateHash);
-        Assert.NotEqual(initialHash, new GameSimulation(otherMap).CreateSnapshot().StateHash);
+        Assert.NotEqual(initialHash, new GameSimulation(otherMap, DefaultRules.Create()).CreateSnapshot().StateHash);
     }
 
     private static WorldSnapshot RunScenario(MapDefinition map)
     {
         const int scenarioTicks = 10;
-        var simulation = new GameSimulation(map);
+        var simulation = new GameSimulation(map, DefaultRules.Create());
         simulation.Enqueue(new UnknownCommand(Player, TargetTick: 3));
 
         for (var tick = 0; tick < scenarioTicks; tick++)

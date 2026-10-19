@@ -1,7 +1,10 @@
 using System.Collections.Immutable;
+using Rts.Primitives;
 using Rts.Simulation.Contracts;
 using Rts.Simulation.Ecs;
 using Rts.Simulation.Maps;
+using Rts.Simulation.Movement;
+using Rts.Simulation.Rules;
 
 namespace Rts.Simulation;
 
@@ -12,15 +15,25 @@ namespace Rts.Simulation;
 public sealed class GameSimulation
 {
     private readonly World _world;
+    private readonly GameRules _rules;
     private readonly SortedDictionary<long, List<Command>> _pendingByTick = [];
     private long _tick;
     private int _rejectedCommandCount;
 
-    /// <summary>Creates the start state of <paramref name="map"/> at tick 0.</summary>
-    public GameSimulation(MapDefinition map)
+    /// <summary>Creates the start state of <paramref name="map"/> at tick 0, played with <paramref name="rules"/>.</summary>
+    /// <exception cref="ArgumentOutOfRangeException">The villager speed is not positive.</exception>
+    public GameSimulation(MapDefinition map, GameRules rules)
     {
         ArgumentNullException.ThrowIfNull(map);
+        ArgumentNullException.ThrowIfNull(rules);
+
+        if (rules.VillagerSpeedPerTick <= Fixed.Zero)
+        {
+            throw new ArgumentOutOfRangeException(nameof(rules), "Villager speed must be positive.");
+        }
+
         _world = WorldFactory.FromMap(map);
+        _rules = rules;
     }
 
     /// <summary>
@@ -46,18 +59,18 @@ public sealed class GameSimulation
         commands.Add(command);
     }
 
-    /// <summary>Executes the commands of the current tick and advances the simulation by one tick.</summary>
+    /// <summary>Executes the commands of the current tick, runs all systems and advances by one tick.</summary>
     public void Step()
     {
         if (_pendingByTick.Remove(_tick, out var commands))
         {
-            // No command type is executable yet (Move follows in step 5), so every command is invalid input.
-            foreach (var _ in commands)
+            foreach (var command in commands)
             {
-                Reject();
+                Execute(command);
             }
         }
 
+        MovementSystem.Update(_world, _rules.VillagerSpeedPerTick);
         _tick++;
     }
 
@@ -69,6 +82,20 @@ public sealed class GameSimulation
             .ToImmutableArray();
 
         return new WorldSnapshot(_tick, ComputeStateHash(entities), _rejectedCommandCount, entities);
+    }
+
+    private void Execute(Command command)
+    {
+        var isExecuted = command switch
+        {
+            MoveCommand move => MoveCommandHandler.TryExecute(_world, move),
+            _ => false,
+        };
+
+        if (!isExecuted)
+        {
+            Reject();
+        }
     }
 
     private void Reject()
@@ -90,6 +117,19 @@ public sealed class GameSimulation
             hasher.Add(entity.Owner.Value);
             hasher.Add(entity.Position.X.Raw);
             hasher.Add(entity.Position.Y.Raw);
+        }
+
+        foreach (var unit in _world.Paths.EntitiesInIdOrder())
+        {
+            var follower = _world.Paths.Get(unit);
+            hasher.Add(unit.Index);
+            hasher.Add(follower.NextWaypoint);
+
+            foreach (var waypoint in follower.Waypoints)
+            {
+                hasher.Add(waypoint.X);
+                hasher.Add(waypoint.Y);
+            }
         }
 
         return hasher.Value;
