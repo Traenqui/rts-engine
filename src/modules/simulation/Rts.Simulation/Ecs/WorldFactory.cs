@@ -13,7 +13,7 @@ internal static class WorldFactory
 
     public static World FromMap(MapDefinition map)
     {
-        var world = new World();
+        var world = new World(map.BuildNavGrid());
 
         world.Spawn(EntityKind.TownCenter, MapPlayer, TownCenterPosition(map));
 
