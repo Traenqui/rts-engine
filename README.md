@@ -16,6 +16,21 @@ dotnet test Rts.slnx
 
 CI runs the same commands on Windows, Linux and macOS, with warnings as errors.
 
+## Play
+
+```sh
+dotnet run --project src/hosts/Rts.Game
+dotnet run --project src/hosts/Rts.Game -- --scenario scenarios/move-around-rocks.scenario --debug
+```
+
+| Input | Action |
+| --- | --- |
+| W A S D / arrow keys | Pan the camera |
+| Mouse wheel | Zoom |
+| F3 | Toggle the debug overlay (grid, paths, tick, FPS/TPS, state hash) |
+
+`--screenshot <file.png>` saves a frame after about two seconds and exits. Rendering is checked manually with the [rendering checklist](docs/rendering-checklist.md).
+
 ## Headless scenarios
 
 `Rts.Headless` plays scenario files from [`scenarios/`](scenarios) without rendering and prints the deterministic end-state hash.
@@ -37,5 +52,6 @@ The scenario format is documented in `ScenarioParser` (`src/modules/simulation/R
 
 - [Architecture decisions](docs/decisions/README.md)
 - [Determinism checklist](docs/determinism-checklist.md)
+- [Rendering checklist](docs/rendering-checklist.md)
 
 Last updated: 2026-10-19
