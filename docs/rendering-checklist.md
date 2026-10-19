@@ -24,6 +24,15 @@ Für eine schnelle Sichtprüfung ohne Bedienung speichert `--screenshot <datei.p
 - [ ] Die Kamera lässt sich nicht über den Kartenrand hinaus verschieben
 - [ ] Kleine und grosse Karten starten formatfüllend
 
+## Auswahl und Bewegung (US-03, US-04)
+
+- [ ] Linksklick auf einen Dorfbewohner wählt nur ihn aus, ein weisser Ring liegt flach am Boden
+- [ ] Ein Klick auf Kopf oder Füsse des Dorfbewohners trifft beide
+- [ ] Linksklick auf das Dorfzentrum wählt es aus, Klick auf leeren Boden, Baum oder Felsen hebt die Auswahl auf
+- [ ] Ein Rahmen zeigt beim Ziehen ein halbtransparentes Rechteck und wählt nur die eigenen Dorfbewohner darin aus
+- [ ] Rechtsklick auf ein freies Tile schickt die ausgewählten Dorfbewohner per Pfad dorthin
+- [ ] Rechtsklick ohne Auswahl, mit nur dem Dorfzentrum oder neben die Karte erzeugt keinen Command (Overlay: verworfene Commands bleiben gleich)
+
 ## Bewegung und Overlay (US-09)
 
 - [ ] Einheiten im Szenario gleiten flüssig, ohne 20-Hz-Ruckeln
