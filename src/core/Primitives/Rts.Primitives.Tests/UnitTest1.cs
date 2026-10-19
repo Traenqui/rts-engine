@@ -1,4 +1,4 @@
-﻿namespace Rts.Primitives.Test;
+﻿namespace Rts.Primitives.Tests;
 
 public class UnitTest1
 {
