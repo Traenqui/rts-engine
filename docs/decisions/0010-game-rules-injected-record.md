@@ -9,7 +9,7 @@ Meilenstein 1 braucht Balancing-Werte (Laufgeschwindigkeit, Tragkapazität, Samm
 ## Decision
 
 - Ein **immutable `GameRules`-Record** (inkl. `UnitDefinition` usw.) wird der Simulation **per Konstruktor injiziert**. Die Simulation liest nie globale Konstanten.
-- **`DefaultRules`** in C# liefert die Werte für Meilenstein 1. Die konkreten Werte stehen in der PRD für Meilenstein 1.
+- **`DefaultRules`** in C# liefert die Werte für Meilenstein 1. Die konkreten Werte stehen in der [PRD für Meilenstein 1](../prd-milestone-1-economy-loop.md#anhang-a-defaultrules).
 - Werte werden in **`Fixed`** gespeichert ([ADR-0005](0005-fixed-point-q48-16.md)). Angaben pro Sekunde werden **einmal beim Erzeugen** in Werte pro Tick umgerechnet.
 - **JSON-Loader auf Bedarf** (vermutlich mit Kampf und Balancing in Meilenstein 2): Er erzeugt denselben Record, mit Validierung an der Systemgrenze.
 
