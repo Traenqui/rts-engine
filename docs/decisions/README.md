@@ -17,6 +17,7 @@ Entscheidungen der RTS-Engine (AoE-Clone). Format: MADR (voll) bzw. Lightweight 
 | [ADR-0011](0011-ascii-map-format.md)                      | ASCII-Kartenformat mit Validierung                                     | Accepted | 2026-10-19 | Jonas Gerber |
 | [ADR-0012](0012-client-module.md)                         | Modul `Rts.Client` für Kamera, Auswahl und Input                       | Accepted | 2026-10-19 | Jonas Gerber |
 | [ADR-0013](0013-test-strategy-os-matrix-golden-hash.md)   | Teststrategie mit OS-Matrix, Golden-Hash und Coverage-Ausnahme         | Accepted | 2026-10-19 | Jonas Gerber |
+| [ADR-0014](0014-navigation-as-core-library.md)           | Navigation als Core-Bibliothek statt Feature-Modul                     | Accepted | 2026-10-19 | Jonas Gerber |
 
 ## Abhängigkeiten
 
@@ -35,6 +36,8 @@ graph TD
     A9 --> A12
     A4 --> A13[0013 Teststrategie]
     A11[0011 ASCII-Karte] --> A8
+    A8 --> A14[0014 Navigation als Core]
+    A11 --> A14
 ```
 
 ## Action Items nach Schritt

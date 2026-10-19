@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Rts.Navigation\Rts.Navigation.csproj" />
-    <ProjectReference Include="..\Rts.Navigation.Contracts\Rts.Navigation.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
