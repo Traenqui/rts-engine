@@ -20,20 +20,25 @@ public readonly record struct CameraInput(Vector2 Pan, float Zoom);
 public sealed record CameraRig(Vector2 Focus, float Distance)
 {
     public const float PitchDegrees = 55f;
-    public const float DefaultDistance = 30f;
     public const float MinDistance = 10f;
     public const float MaxDistance = 80f;
 
     private const float FieldOfViewDegrees = 45f;
+
+    // Start distance per tile of the longer map edge, so small test maps fill the screen as well as large ones.
+    private const float FitDistancePerTile = 1f;
 
     // Pan speed grows with distance so the screen scrolls at a similar rate at every zoom level.
     private const float PanTilesPerSecondPerDistance = 0.5f;
     private const float ZoomDistancePerNotch = 3f;
     private const float DegreesToRadians = MathF.PI / 180f;
 
-    /// <summary>Camera at the default distance above the map center.</summary>
-    public static CameraRig CenteredOn(CameraBounds bounds) =>
-        new(new Vector2(bounds.Width / 2, bounds.Height / 2), DefaultDistance);
+    /// <summary>Camera above the map center at a distance that fits the map size.</summary>
+    public static CameraRig CenteredOn(CameraBounds bounds)
+    {
+        var distance = Math.Clamp(Math.Max(bounds.Width, bounds.Height) * FitDistancePerTile, MinDistance, MaxDistance);
+        return new CameraRig(new Vector2(bounds.Width / 2, bounds.Height / 2), distance);
+    }
 
     /// <summary>Applies one frame of input; the focus stays inside <paramref name="bounds"/>.</summary>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="deltaSeconds"/> is negative.</exception>

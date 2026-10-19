@@ -8,15 +8,27 @@ public sealed class CameraRigTests
     private const float Tolerance = 1e-4f;
     private const float OneSecond = 1f;
 
+    private const float MidDistance = 30f;
+
     private static readonly CameraBounds Bounds = new(Width: 64, Height: 64);
 
     [Fact]
-    public void CenteredOn_StartsInMapCenterAtDefaultDistance()
+    public void CenteredOn_StartsInMapCenter()
     {
-        var rig = CameraRig.CenteredOn(Bounds);
+        var rig = CameraRig.CenteredOn(new CameraBounds(Width: 64, Height: 32));
 
-        Assert.Equal(new Vector2(32, 32), rig.Focus);
-        Assert.Equal(CameraRig.DefaultDistance, rig.Distance);
+        Assert.Equal(new Vector2(32, 16), rig.Focus);
+    }
+
+    [Theory]
+    [InlineData(8, 6, CameraRig.MinDistance)]
+    [InlineData(40, 32, 40f)]
+    [InlineData(256, 256, CameraRig.MaxDistance)]
+    public void CenteredOn_FitsDistanceToLongerMapEdge(float width, float height, float expectedDistance)
+    {
+        var rig = CameraRig.CenteredOn(new CameraBounds(width, height));
+
+        Assert.Equal(expectedDistance, rig.Distance);
     }
 
     [Fact]
@@ -57,7 +69,7 @@ public sealed class CameraRigTests
     [Fact]
     public void Update_PanBeyondMapEdge_StopsAtEdge()
     {
-        var rig = new CameraRig(new Vector2(1, 1), CameraRig.DefaultDistance);
+        var rig = new CameraRig(new Vector2(1, 1), MidDistance);
         const float longPan = 100f;
 
         var moved = rig.Update(new CameraInput(new Vector2(-1, 1), Zoom: 0), longPan, Bounds);
