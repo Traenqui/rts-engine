@@ -1,4 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\modules\client\Rts.Client\Rts.Client.csproj" />
+    <ProjectReference Include="..\..\modules\rendering\Rts.Rendering\Rts.Rendering.csproj" />
+    <ProjectReference Include="..\..\modules\rendering\Rts.Rendering.Contracts\Rts.Rendering.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\simulation\Rts.Simulation\Rts.Simulation.csproj" />
+    <ProjectReference Include="..\..\modules\simulation\Rts.Simulation.Contracts\Rts.Simulation.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\default.map" LogicalName="Rts.Game.Maps.default.map" />
+  </ItemGroup>
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
