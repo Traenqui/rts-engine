@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Rts.Navigation.Grid;
 using Rts.Primitives;
 using Rts.Simulation.Contracts;
 using Rts.Simulation.Ecs;
@@ -34,7 +35,11 @@ public sealed class GameSimulation
 
         _world = WorldFactory.FromMap(map);
         _rules = rules;
+        Terrain = new TerrainInfo(map.Width, map.Height, map.Rocks);
     }
+
+    /// <summary>Static terrain of the map, for rendering and clients.</summary>
+    public TerrainInfo Terrain { get; }
 
     /// <summary>
     /// Schedules <paramref name="command"/> for its target tick. Commands for already simulated ticks are rejected,
@@ -78,10 +83,27 @@ public sealed class GameSimulation
     public WorldSnapshot CreateSnapshot()
     {
         var entities = _world.Identities.EntitiesInIdOrder()
-            .Select(id => new EntitySnapshot(id, _world.Identities.Get(id).Kind, _world.Identities.Get(id).Owner, _world.Positions.Get(id)))
+            .Select(CreateEntitySnapshot)
             .ToImmutableArray();
 
         return new WorldSnapshot(_tick, ComputeStateHash(entities), _rejectedCommandCount, entities);
+    }
+
+    private EntitySnapshot CreateEntitySnapshot(EntityId id)
+    {
+        var identity = _world.Identities.Get(id);
+        return new EntitySnapshot(id, identity.Kind, identity.Owner, _world.Positions.Get(id), RemainingPath(id));
+    }
+
+    private ImmutableArray<GridPosition> RemainingPath(EntityId id)
+    {
+        if (!_world.Paths.Has(id))
+        {
+            return [];
+        }
+
+        var follower = _world.Paths.Get(id);
+        return follower.Waypoints[follower.NextWaypoint..];
     }
 
     private void Execute(Command command)

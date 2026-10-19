@@ -169,6 +169,31 @@ public sealed class MoveCommandTests
     };
 
     [Fact]
+    public void Snapshot_MovingUnit_ExposesRemainingWaypoints()
+    {
+        var simulation = CreateSimulation();
+        simulation.Enqueue(Move(Villager, new GridPosition(3, 0)));
+
+        simulation.Step();
+        var whileMoving = EntityOf(simulation, Villager).RemainingPath;
+        StepTimes(simulation, TicksPerTileAtTestSpeed);
+        var afterFirstTile = EntityOf(simulation, Villager).RemainingPath;
+        StepTimes(simulation, 3 * TicksPerTileAtTestSpeed);
+
+        Assert.Equal<GridPosition>([new GridPosition(1, 0), new GridPosition(2, 0), new GridPosition(3, 0)], whileMoving);
+        Assert.Equal<GridPosition>([new GridPosition(2, 0), new GridPosition(3, 0)], afterFirstTile);
+        Assert.Empty(EntityOf(simulation, Villager).RemainingPath);
+    }
+
+    [Fact]
+    public void Snapshot_IdleUnit_HasNoRemainingPath()
+    {
+        var simulation = CreateSimulation();
+
+        Assert.Empty(EntityOf(simulation, Villager).RemainingPath);
+    }
+
+    [Fact]
     public void StateHash_IncludesPathState()
     {
         var towardsFarTile = CreateSimulation();
@@ -203,8 +228,10 @@ public sealed class MoveCommandTests
     private static MoveCommand Move(EntityId unit, GridPosition target, long targetTick = 0) =>
         new(Owner, targetTick, ImmutableArray.Create(unit), target);
 
-    private static FixedVector2 PositionOf(GameSimulation simulation, EntityId id) =>
-        simulation.CreateSnapshot().Entities.Single(entity => entity.Id == id).Position;
+    private static EntitySnapshot EntityOf(GameSimulation simulation, EntityId id) =>
+        simulation.CreateSnapshot().Entities.Single(entity => entity.Id == id);
+
+    private static FixedVector2 PositionOf(GameSimulation simulation, EntityId id) => EntityOf(simulation, id).Position;
 
     private static void StepTimes(GameSimulation simulation, int ticks)
     {
