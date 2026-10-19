@@ -162,9 +162,9 @@ public sealed class BreadthFirstSearchTests
     {
         var cells = new List<GridPosition>();
 
-        for (var y = origin.y; y < origin.y + size; y++)
+        for (var y = origin.Y; y < origin.Y + size; y++)
         {
-            for (var x = origin.x; x < origin.x + size; x++)
+            for (var x = origin.X; x < origin.X + size; x++)
             {
                 var cell = new GridPosition(x, y);
                 grid.SetWalkable(cell, false);
@@ -186,7 +186,7 @@ public sealed class BreadthFirstSearchTests
 
         for (var i = 1; i < path.Count; i++)
         {
-            var step = Math.Abs(path[i].x - path[i - 1].x) + Math.Abs(path[i].y - path[i - 1].y);
+            var step = Math.Abs(path[i].X - path[i - 1].X) + Math.Abs(path[i].Y - path[i - 1].Y);
             Assert.True(step == 1, $"{path[i - 1]} -> {path[i]} is not a single orthogonal step");
         }
     }

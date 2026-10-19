@@ -122,15 +122,15 @@ public static class AsciiMapParser
         // Cells arrive in row-major order, so the first cell is the top-left one of a valid block.
         var origin = cells[0];
         var isSingleFullBlock = cells.Count == expectedCellCount
-            && cells.Min(cell => cell.x) == origin.x
-            && cells.Max(cell => cell.x) - origin.x == expectedSpan
-            && cells[^1].y - origin.y == expectedSpan;
+            && cells.Min(cell => cell.X) == origin.X
+            && cells.Max(cell => cell.X) - origin.X == expectedSpan
+            && cells[^1].Y - origin.Y == expectedSpan;
 
         if (!isSingleFullBlock)
         {
             throw new MapFormatException(
-                origin.y + 1,
-                origin.x + 1,
+                origin.Y + 1,
+                origin.X + 1,
                 $"town center must be exactly one complete {MapDefinition.TownCenterSize}x{MapDefinition.TownCenterSize} block of '{TownCenter}'");
         }
 

@@ -25,7 +25,7 @@ public sealed record MapDefinition(
         {
             for (var x = 0; x < TownCenterSize; x++)
             {
-                builder.Add(new GridPosition(TownCenterOrigin.x + x, TownCenterOrigin.y + y));
+                builder.Add(new GridPosition(TownCenterOrigin.X + x, TownCenterOrigin.Y + y));
             }
         }
 
