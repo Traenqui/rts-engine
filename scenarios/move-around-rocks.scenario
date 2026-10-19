@@ -1,0 +1,18 @@
+# Two villagers path around a rock wall, one is redirected mid-way,
+# and an invalid command (moving the town center) is rejected.
+ticks 600
+
+map
+V..#....
+...#....
+...#.T..
+........
+CCC.....
+CCC....V
+CCC.....
+end
+
+at 0 move 1,2 to 6,0
+at 0 move 0 to 4,4
+at 90 move 2 to 0,3
+at 300 move 1 to 3,3
