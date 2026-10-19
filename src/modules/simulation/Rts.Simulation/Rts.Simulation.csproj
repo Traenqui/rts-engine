@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Rts.Simulation.Contracts\Rts.Simulation.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\core\Navigation\Rts.Navigation\Rts.Navigation.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
