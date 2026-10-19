@@ -27,9 +27,12 @@ dotnet run --project src/hosts/Rts.Game -- --scenario scenarios/move-around-rock
 | --- | --- |
 | W A S D / arrow keys | Pan the camera |
 | Mouse wheel | Zoom |
+| Left click | Select a villager or the town center; click on empty ground to deselect |
+| Left drag | Select all own villagers inside the box |
+| Right click | Move the selected villagers to the clicked tile |
 | F3 | Toggle the debug overlay (grid, paths, tick, FPS/TPS, state hash) |
 
-`--screenshot <file.png>` saves a frame after about two seconds and exits. Rendering is checked manually with the [rendering checklist](docs/rendering-checklist.md).
+`--screenshot <file.png>` (a path relative to the working directory) saves a frame after about two seconds and exits. Rendering is checked manually with the [rendering checklist](docs/rendering-checklist.md).
 
 ## Headless scenarios
 

@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Raylib_cs;
 using Rts.Client.Camera;
+using Rts.Client.Selection;
 using static Raylib_cs.Raylib;
 
 namespace Rts.Client.Input;
@@ -18,6 +19,13 @@ public static class RaylibInput
 
         return new CameraInput(pan == Vector2.Zero ? pan : Vector2.Normalize(pan), GetMouseWheelMove());
     }
+
+    /// <summary>Left button selects, right button commands.</summary>
+    public static PointerInput ReadPointer() => new(
+        GetMousePosition(),
+        IsMouseButtonPressed(MouseButton.Left),
+        IsMouseButtonReleased(MouseButton.Left),
+        IsMouseButtonPressed(MouseButton.Right));
 
     /// <summary>True in the frame F3 is pressed.</summary>
     public static bool IsDebugOverlayToggled() => IsKeyPressed(KeyboardKey.F3);

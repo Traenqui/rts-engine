@@ -1,7 +1,11 @@
+using System.Numerics;
 using Raylib_cs;
 using Rts.Client.Camera;
 using Rts.Client.Input;
+using Rts.Client.Picking;
+using Rts.Client.Selection;
 using Rts.Client.Timing;
+using Rts.Rendering.Contracts;
 using Rts.Rendering.Debug;
 using Rts.Rendering.Raylib;
 using Rts.Rendering.Scene;
@@ -26,6 +30,8 @@ internal sealed class GameWindow(GameSession session, GameOptions options)
     private readonly CameraBounds _bounds = BoundsOf(session);
     private CameraRig _camera = CameraRig.CenteredOn(BoundsOf(session));
     private FixedStepClock _clock = FixedStepClock.Start;
+    private SelectionTool _selection = SelectionTool.Empty;
+    private ScreenRectangle? _selectionBox;
     private bool _isDebugOverlayVisible = options.IsDebugOverlayVisible;
     private int _ticksInStatsWindow;
     private double _statsWindowElapsed;
@@ -65,6 +71,7 @@ internal sealed class GameWindow(GameSession session, GameOptions options)
     {
         _camera = _camera.Update(RaylibInput.ReadCamera(), frameSeconds, _bounds);
         _isDebugOverlayVisible ^= RaylibInput.IsDebugOverlayToggled();
+        UpdateSelection();
 
         var clockFrame = _clock.Advance(frameSeconds, TickSeconds);
         _clock = clockFrame.Next;
@@ -78,14 +85,44 @@ internal sealed class GameWindow(GameSession session, GameOptions options)
         return clockFrame.Alpha;
     }
 
+    private void UpdateSelection()
+    {
+        var screenSize = new Vector2(GetScreenWidth(), GetScreenHeight());
+
+        // A minimized window has no screen area to pick in.
+        if (screenSize.X <= 0 || screenSize.Y <= 0)
+        {
+            return;
+        }
+
+        var pointer = RaylibInput.ReadPointer();
+        var projection = new ScreenProjection(_camera.ToView(), screenSize);
+        var context = new PickingContext(projection, session.Current, GameSession.LocalPlayer, session.Simulation.Terrain);
+        var update = _selection.Update(pointer, context);
+
+        _selection = update.Next;
+        _selectionBox = _selection.DragRectangle(pointer.Position);
+
+        if (update.Command is { } command)
+        {
+            session.Simulation.Enqueue(command);
+        }
+    }
+
     private void Draw(float alpha)
     {
         var terrain = session.Simulation.Terrain;
         var entities = SnapshotInterpolator.Interpolate(session.Previous, session.Current, alpha);
+        var frame = new SceneFrame(terrain, entities, [.. _selection.Selected]);
         Action? debug3D = _isDebugOverlayVisible ? () => DebugOverlayRenderer.Draw3D(terrain, entities) : null;
 
         BeginDrawing();
-        WorldRenderer.Draw(terrain, entities, _camera.ToView(), debug3D);
+        WorldRenderer.Draw(frame, _camera.ToView(), debug3D);
+
+        if (_selectionBox is { } box)
+        {
+            SelectionRenderer.DrawBox(box);
+        }
 
         if (_isDebugOverlayVisible)
         {

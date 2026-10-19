@@ -12,6 +12,9 @@ internal sealed class GameSession
 {
     private const string DefaultMapResource = "Rts.Game.Maps.default.map";
 
+    /// <summary>The player at this machine; maps assign all their units to player 1 in milestone 1.</summary>
+    public static readonly PlayerId LocalPlayer = new(1);
+
     private GameSession(GameSimulation simulation)
     {
         Simulation = simulation;
