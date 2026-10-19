@@ -6,6 +6,15 @@ public sealed class NavGrid
 {
     private readonly bool[] _walkable;
 
+    // Array instead of ReadOnlySpan: spans cannot live across yield boundaries (CS4007)
+    private static readonly GridPosition[] NeighborDirections =
+    [
+        new GridPosition { x = 0, y = -1 }, // Up
+        new GridPosition { x = 1, y = 0 },  // Right
+        new GridPosition { x = 0, y = 1 },  // Down
+        new GridPosition { x = -1, y = 0 }  // Left
+    ];
+
     public int Width { get; }
     public int Height { get; }
 
@@ -45,15 +54,6 @@ public sealed class NavGrid
 
         _walkable[ToIndex(position)] = walkable;
     }
-
-    // Array instead of ReadOnlySpan: spans cannot live across yield boundaries (CS4007)
-    private static readonly GridPosition[] NeighborDirections =
-    [
-        new GridPosition { x = 0, y = -1 }, // Up
-        new GridPosition { x = 1, y = 0 },  // Right
-        new GridPosition { x = 0, y = 1 },  // Down
-        new GridPosition { x = -1, y = 0 }  // Left
-    ];
 
     public IEnumerable<GridPosition> GetNeighbors(GridPosition position)
     {
