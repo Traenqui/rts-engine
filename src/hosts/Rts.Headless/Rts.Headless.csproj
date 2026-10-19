@@ -1,11 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\core\Navigation\Rts.Navigation\Rts.Navigation.csproj" />
     <ProjectReference Include="..\..\modules\simulation\Rts.Simulation\Rts.Simulation.csproj" />
     <ProjectReference Include="..\..\modules\simulation\Rts.Simulation.Contracts\Rts.Simulation.Contracts.csproj" />
-    <ProjectReference Include="..\..\modules\rendering\Rts.Rendering\Rts.Rendering.csproj" />
-    <ProjectReference Include="..\..\modules\rendering\Rts.Rendering.Contracts\Rts.Rendering.Contracts.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
