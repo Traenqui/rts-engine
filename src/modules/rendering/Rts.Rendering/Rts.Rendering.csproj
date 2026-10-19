@@ -5,6 +5,10 @@
     <ProjectReference Include="..\..\simulation\Rts.Simulation.Contracts\Rts.Simulation.Contracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Raylib-cs" Version="8.1.0" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
