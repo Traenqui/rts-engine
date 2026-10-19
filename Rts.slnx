@@ -18,6 +18,10 @@
     <Project Path="src/hosts/Rts.Headless/Rts.Headless.csproj" />
   </Folder>
   <Folder Name="/src/modules/" />
+  <Folder Name="/src/modules/client/">
+    <Project Path="src/modules/client/Rts.Client.Tests/Rts.Client.Tests.csproj" />
+    <Project Path="src/modules/client/Rts.Client/Rts.Client.csproj" />
+  </Folder>
   <Folder Name="/src/modules/rendering/">
     <Project Path="src/modules/rendering/Rts.Rendering.Contracts/Rts.Rendering.Contracts.csproj" />
     <Project Path="src/modules/rendering/Rts.Rendering/Rts.Rendering.csproj" />
