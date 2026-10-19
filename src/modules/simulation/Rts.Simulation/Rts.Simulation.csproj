@@ -5,6 +5,10 @@
     <ProjectReference Include="..\..\..\core\Navigation\Rts.Navigation\Rts.Navigation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Rts.Simulation.Tests" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
