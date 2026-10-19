@@ -87,12 +87,93 @@ public sealed class BreadthFirstSearchTests
         Assert.Empty(path);
     }
 
+    [Fact]
+    public void FindPathToAdjacent_SingleBlockedTarget_EndsOnWalkableNeighbor()
+    {
+        var grid = new NavGrid(GridSize, GridSize);
+        var tree = new GridPosition(4, 2);
+        grid.SetWalkable(tree, false);
+        var start = new GridPosition(0, 2);
+
+        var path = BreadthFirstSearch.FindPathToAdjacent(grid, start, [tree]);
+
+        Assert.Equal(new GridPosition(3, 2), path[^1]);
+        Assert.Equal(4, path.Count);
+        AssertValidPath(grid, path, (start, path[^1]));
+    }
+
+    [Fact]
+    public void FindPathToAdjacent_StartAlreadyAdjacent_ReturnsOnlyStart()
+    {
+        var grid = new NavGrid(GridSize, GridSize);
+        var tree = new GridPosition(2, 2);
+        grid.SetWalkable(tree, false);
+        var start = new GridPosition(2, 1);
+
+        var path = BreadthFirstSearch.FindPathToAdjacent(grid, start, [tree]);
+
+        Assert.Equal([start], path);
+    }
+
+    [Fact]
+    public void FindPathToAdjacent_MultiCellFootprint_EndsNextToNearestCell()
+    {
+        const int largeGridSize = 9;
+        var grid = new NavGrid(largeGridSize, largeGridSize);
+        var townCenter = BlockSquare(grid, origin: new GridPosition(3, 3), size: 3);
+        var start = new GridPosition(4, 0);
+
+        var path = BreadthFirstSearch.FindPathToAdjacent(grid, start, townCenter);
+
+        Assert.Equal(new GridPosition(4, 2), path[^1]);
+        AssertValidPath(grid, path, (start, path[^1]));
+    }
+
+    [Fact]
+    public void FindPathToAdjacent_AllNeighborsBlocked_ReturnsEmptyPath()
+    {
+        var grid = new NavGrid(GridSize, GridSize);
+        var target = BlockSquare(grid, origin: new GridPosition(1, 1), size: 3);
+        var innerTree = new GridPosition(2, 2);
+
+        var path = BreadthFirstSearch.FindPathToAdjacent(grid, new GridPosition(0, 0), [innerTree]);
+
+        Assert.Contains(innerTree, target);
+        Assert.Empty(path);
+    }
+
+    [Fact]
+    public void FindPathToAdjacent_EmptyTarget_Throws()
+    {
+        var grid = new NavGrid(GridSize, GridSize);
+
+        Assert.Throws<ArgumentException>(
+            () => BreadthFirstSearch.FindPathToAdjacent(grid, new GridPosition(0, 0), []));
+    }
+
     private static void BlockColumn(NavGrid grid, int x, int fromY, int toY)
     {
         for (var y = fromY; y <= toY; y++)
         {
             grid.SetWalkable(new GridPosition(x, y), false);
         }
+    }
+
+    private static GridPosition[] BlockSquare(NavGrid grid, GridPosition origin, int size)
+    {
+        var cells = new List<GridPosition>();
+
+        for (var y = origin.y; y < origin.y + size; y++)
+        {
+            for (var x = origin.x; x < origin.x + size; x++)
+            {
+                var cell = new GridPosition(x, y);
+                grid.SetWalkable(cell, false);
+                cells.Add(cell);
+            }
+        }
+
+        return [.. cells];
     }
 
     private static void AssertValidPath(

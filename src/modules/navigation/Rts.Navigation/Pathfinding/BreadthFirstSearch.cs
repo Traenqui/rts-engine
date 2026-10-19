@@ -19,6 +19,30 @@ internal static class BreadthFirstSearch
         return Search(grid, start, cell => cell == goal);
     }
 
+    /// <summary>
+    /// Finds the shortest path to any walkable tile orthogonally adjacent to <paramref name="targetCells"/>,
+    /// e.g. the footprint of a tree or a building that units cannot enter themselves.
+    /// </summary>
+    /// <returns>Path ending next to the nearest target cell, or an empty list if no such tile is reachable.</returns>
+    /// <exception cref="ArgumentException"><paramref name="targetCells"/> is empty.</exception>
+    public static IReadOnlyList<GridPosition> FindPathToAdjacent(
+        NavGrid grid,
+        GridPosition start,
+        IReadOnlyCollection<GridPosition> targetCells)
+    {
+        if (targetCells.Count == 0)
+        {
+            throw new ArgumentException("Target must contain at least one cell.", nameof(targetCells));
+        }
+
+        var goals = targetCells
+            .SelectMany(grid.GetNeighbors)
+            .Except(targetCells)
+            .ToHashSet();
+
+        return Search(grid, start, goals.Contains);
+    }
+
     private static IReadOnlyList<GridPosition> Search(NavGrid grid, GridPosition start, Func<GridPosition, bool> isGoal)
     {
         // Lookup-only collections: iteration order never affects the result, which keeps the search deterministic.
