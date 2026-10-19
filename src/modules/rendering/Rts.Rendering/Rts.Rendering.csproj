@@ -2,6 +2,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Rts.Rendering.Contracts\Rts.Rendering.Contracts.csproj" />
+    <ProjectReference Include="..\..\simulation\Rts.Simulation.Contracts\Rts.Simulation.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Raylib-cs" Version="8.1.0" />
   </ItemGroup>
 
   <PropertyGroup>

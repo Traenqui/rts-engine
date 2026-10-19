@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Rts.Navigation.Grid;
 using Rts.Primitives;
 
 namespace Rts.Simulation.Contracts;
@@ -18,4 +19,10 @@ public sealed record WorldSnapshot(
     ImmutableArray<EntitySnapshot> Entities);
 
 /// <summary>Render-relevant state of one entity.</summary>
-public sealed record EntitySnapshot(EntityId Id, EntityKind Kind, PlayerId Owner, FixedVector2 Position);
+/// <param name="RemainingPath">Waypoints still ahead of a moving unit, empty when idle; used by the debug overlay.</param>
+public sealed record EntitySnapshot(
+    EntityId Id,
+    EntityKind Kind,
+    PlayerId Owner,
+    FixedVector2 Position,
+    ImmutableArray<GridPosition> RemainingPath);

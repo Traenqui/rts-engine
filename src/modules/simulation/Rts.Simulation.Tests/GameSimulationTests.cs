@@ -60,6 +60,18 @@ public sealed class GameSimulationTests
     }
 
     [Fact]
+    public void Terrain_ReflectsMapSizeAndRocks()
+    {
+        var map = AsciiMapParser.Parse(string.Join("\n", "CCC.#", "CCC..", "CCC#."));
+
+        var terrain = new GameSimulation(map, DefaultRules.Create()).Terrain;
+
+        Assert.Equal(5, terrain.Width);
+        Assert.Equal(3, terrain.Height);
+        Assert.Equal<GridPosition>([new GridPosition(4, 0), new GridPosition(3, 2)], terrain.Rocks);
+    }
+
+    [Fact]
     public void Step_AdvancesTickByOne()
     {
         var simulation = new GameSimulation(Map, DefaultRules.Create());
