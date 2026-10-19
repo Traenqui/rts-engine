@@ -18,4 +18,8 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Rts.Primitives\Rts.Primitives.csproj" />
+  </ItemGroup>
+
 </Project>

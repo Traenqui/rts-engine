@@ -1,0 +1,58 @@
+# Build and test on every desktop target (ADR-0002, ADR-0013).
+# The OS matrix is the proof that the deterministic simulation behaves identically on x64 and ARM64.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  # Debug on purpose: overflow checks in Rts.Primitives are only compiled into Debug builds (ADR-0005).
+  BUILD_CONFIGURATION: Debug
+
+jobs:
+  build-and-test:
+    name: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # macos-latest runs on Apple Silicon (ARM64), the other two on x64.
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore Rts.slnx
+
+      - name: Build
+        run: dotnet build Rts.slnx --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} -warnaserror
+
+      - name: Test
+        run: >-
+          dotnet test Rts.slnx --no-build --configuration ${{ env.BUILD_CONFIGURATION }}
+          --collect "XPlat Code Coverage" --results-directory TestResults
+
+      - name: Upload coverage
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage
+          path: TestResults/**/coverage.cobertura.xml
+          if-no-files-found: error

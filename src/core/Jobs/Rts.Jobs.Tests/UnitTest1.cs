@@ -1,4 +1,4 @@
-﻿namespace Rts.Jobs.Test;
+﻿namespace Rts.Jobs.Tests;
 
 public class UnitTest1
 {

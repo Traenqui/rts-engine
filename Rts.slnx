@@ -3,11 +3,11 @@
   <Folder Name="/src/core/" />
   <Folder Name="/src/core/Jobs/">
     <Project Path="src/core/Jobs/Rts.Jobs/Rts.Jobs.csproj" />
-    <Project Path="src/core/Jobs/Rts.Jobs.Tests/Rts.Jobs.Test.csproj" />
+    <Project Path="src/core/Jobs/Rts.Jobs.Tests/Rts.Jobs.Tests.csproj" />
   </Folder>
   <Folder Name="/src/core/Primitives/">
     <Project Path="src/core/Primitives/Rts.Primitives/Rts.Primitives.csproj" />
-    <Project Path="src/core/Primitives/Rts.Primitives.Tests/Rts.Primitives.Test.csproj" />
+    <Project Path="src/core/Primitives/Rts.Primitives.Tests/Rts.Primitives.Tests.csproj" />
   </Folder>
   <Folder Name="/src/hosts/">
     <Project Path="src/hosts/Rts.Game/Rts.Game.csproj" />
